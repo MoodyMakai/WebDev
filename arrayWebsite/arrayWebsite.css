@@ -3,4 +3,7 @@ body{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    background-image: url(29b.jpeg);
+    background-size: cover;
+    font-family: 'Rubik Bubbles', cursive;
 }

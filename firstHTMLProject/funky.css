@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+body {font-family: 'Libre Baskerville', serif;}
+body {font-size: x-large;}
+h2 {font-size: small;}
+h1#funny{color: rgb(237, 182, 64);}
+body{
+    background-image: url(syed-ahmad-yXTr6XeJDV8-unsplash.jpg);
+}
+h1 {text-align: center;}
+h2#sub {text-align-last: center;}
+a { font-size: small;}
+a {text-align: left;}
+a {padding-bottom: 1in;  }

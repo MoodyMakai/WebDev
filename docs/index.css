@@ -3,6 +3,18 @@ body{
     flex-direction: column;
     font-size: xx-large;
     background-image: url(syed-ahmad-yXTr6XeJDV8-unsplash.jpg);
+    background-size: cover;
     font-family: 'Rubik Bubbles', cursive;
+    justify-content: center;
+    align-items: center;
+}
 
+h{
+    padding-bottom: 64px;
+}
+a{
+    padding-bottom: 32px;
+    color: darkslategray;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: black;
 }

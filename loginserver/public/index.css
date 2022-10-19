@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+body{font-family: 'Bebas Neue', cursive;
+    font-size: xx-large;
+    display: flex;
+    flex-direction: column;
+    background-image: url(https://www.commonsensemedia.org/sites/default/files/styles/ratio_16_9_small/public/screenshots/csm-movie/1984-ss1.jpg);
+    background-size: cover;
+    color: antiquewhite;
+                    }
+div{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+}
+h1{ align-self: center;
+    padding-bottom: 32px;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: black;}
+button{
+    color: black;
+    background-color: brown;
+    font-size: 32px;
+    padding: 8px;
+    transition-duration: 0.8s;
+    margin: 24px;
+}
+button:hover{
+    background-color: black;
+    color: brown;
+}

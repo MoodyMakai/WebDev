@@ -1,6 +1,5 @@
 let optionsList = ["1", "2", "", "4"];
 let chosenList = ['fake'];
-
 let optionEl = document.querySelector("#options");
 let chosenEl = document.querySelector("#chosen");
 

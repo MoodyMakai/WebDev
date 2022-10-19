@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+body{font-family: 'Bebas Neue', cursive;
+    font-size: 72px;
+    display: flex;
+    flex-direction: column;
+    background-image: url('IMG_9442.jpg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: black;}
+
+div{
+    font-size: 64px;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: black;
+}
+input#go{
+    font-size:32px;
+    transition-duration: .8s;
+    background-color: darkgray;
+    
+}
+input#go:hover{
+    background-color: black;
+    color: brown;
+}

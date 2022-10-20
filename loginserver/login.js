@@ -35,6 +35,7 @@ function htmlEnd(res){
 
 let loginData = [{firstName: "", lastName: "", username: "", password: "",}];
 let postData = [];
+let userData = [];
 
 var gUse = false
 
@@ -57,7 +58,8 @@ app.post('/login', (req,res)=>{
     for (let x of loginData){
         if(x.username === req.body.usernameTry && x.password === req.body.passwordTry){
         session=req.session;
-        req.session.userid=req.body.username;
+        req.session.userid=req.body.usernameTry;
+        //postData.push({userid:req.session.userid})
         console.log(req.session)
             res.redirect('homepage.html')
             return
@@ -71,11 +73,15 @@ app.post('/homepage', (req,res)=>{
     postData.push({Post:req.body.Post})
     console.log(postData);
     htmlStart(res)
+    res.write(` <link rel="stylesheet" href="homepage.css" type="text/css">`)
     for (let p of postData){
         res.write(`<ul>
-            <li>${p.Post}: From ${userid}</li>
+            <li>${p.Post}: From ${req.session.userid}</li>
             </ul>`) 
     }
+    res.write(`
+    <button onclick = "deletePost()"> Delete Post</button>
+    `)
     htmlEnd(res)
 });
 

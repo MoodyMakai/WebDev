@@ -8,7 +8,11 @@ body{
     flex-direction: column;
 
 }
-
+ul{
+    font-size: 32px;
+    padding: 2px;
+    margin: 4px;
+}
 button{
     color: black;
     background-color: brown;

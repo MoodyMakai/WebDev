@@ -11,15 +11,15 @@ const sessions = require('express-session')
     }
 })*/
 app.use(express.static('public'));
-app.use(urlencoded({extended: false}));
+app.use(urlencoded({ extended: false }));
 app.use(sessions({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false}
-  }))
+    cookie: { secure: false }
+}))
 
-function htmlStart(res){
+function htmlStart(res) {
     res.write(`<!DOCTYPE html>
         <head>
             <title>posts</title>
@@ -27,57 +27,75 @@ function htmlStart(res){
         <body>`)
 };
 
-function htmlEnd(res){
+function htmlEnd(res) {
     res.end(`</body>
-    </html>`) }
+    </html>`)
+}
 
 
 
-let loginData = [{firstName: "", lastName: "", username: "", password: "",}];
+let loginData = [{ firstName: "", lastName: "", username: "", password: "", }];
 let postData = [];
 let userData = [];
 
 var gUse = false
 
 
-app.post('/register', (req, res) =>{
-    loginData.push({firstName:req.body.FirstName, 
-                    lastName:req.body.LastName, 
-                    username:req.body.Username, 
-                    password:req.body.Password})
+app.post('/register', (req, res) => {
+    loginData.push({
+        firstName: req.body.FirstName,
+        lastName: req.body.LastName,
+        username: req.body.Username,
+        password: req.body.Password
+    })
     console.log(loginData)
-    if (req.body.Username === "" || req.body.Password === ""){
+    if (req.body.Username === "" || req.body.Password === "") {
         res.redirect('register.html')
         //create alert somehow
-        }else {
-    res.redirect("login.html")}
+    } else {
+        res.redirect("login.html")
+    }
 });
 
 
-app.post('/login', (req,res)=>{
-    for (let x of loginData){
-        if(x.username === req.body.usernameTry && x.password === req.body.passwordTry){
-        session=req.session;
-        req.session.userid=req.body.usernameTry;
-        //postData.push({userid:req.session.userid})
-        console.log(req.session)
+app.post('/login', (req, res) => {
+    for (let x of loginData) {
+        if (x.username === req.body.usernameTry && x.password === req.body.passwordTry) {
+            session = req.session;
+            req.session.userid = req.body.usernameTry;
+            //postData.push({userid:req.session.userid})
+            console.log(req.session)
             res.redirect('homepage.html')
             return
         }
-    } 
+    }
     res.redirect('register.html')
-}); 
- var session;
+});
+var session;
 
-app.post('/homepage', (req,res)=>{
-    postData.push({Post:req.body.Post})
+app.post('/homepage', (req, res) => {
+    postData.push({ Post: req.body.Post })
     console.log(postData);
+    try {
+        const fs = require("fs");
+        let jsonString = JSON.stringify(postData);
+        console.log("original:");
+        console.log(jsonString);
+        fs.writeFileSync("postData.json", jsonString);
+        let jsonStringFromFile = fs.readFileSync('postData.json', { encoding: 'utf8' });
+        console.log("fromFile:");
+        console.log(jsonStringFromFile);
+        let dataFromFile = JSON.parse(jsonStringFromFile);
+        console.log("After JSON.parse");
+        console.log(dataFromFile);
+    }
+    catch(err) { console.log('alas no file') }
     htmlStart(res)
     res.write(` <link rel="stylesheet" href="homepage.css" type="text/css">`)
-    for (let p of postData){
+    for (let p of postData) {
         res.write(`<ul>
             <li>${p.Post}: From ${req.session.userid}</li>
-            </ul>`) 
+            </ul>`)
     }
     res.write(`
     <button onclick = "deletePost()"> Delete Post</button>

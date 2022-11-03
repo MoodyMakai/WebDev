@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express()
 const port = 3080
+app.use(express.static('public'))
+app.use(express.urlencoded({extended: false}))
+
 
 let schools = [ 
  'Lewiston High School',
@@ -55,11 +58,12 @@ console.log(studentCount)
 
 
 
-app.get('blah/:blahId', (req,res)=>{
-    req.params.weaponId
-    res.json(blah);
+app.get('/schools', (req,res)=>{
+    res.json(schools);
 })
-
+app.get('/students', (req,res)=>{
+    res.json(studentCount); 
+})
 
 
 

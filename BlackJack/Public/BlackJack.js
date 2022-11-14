@@ -19,11 +19,11 @@ function htmlEnd(res){(`
 `)}
 
 
-app.get("/" (req,res) => {
+app.get("/", (req,res) => {
     res.json('blank')
 });
 
-app.post("/hit" (req,res) => {
+app.post("/hit", (req,res) => {
     res.json('blank')
 });
 

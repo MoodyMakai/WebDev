@@ -8,6 +8,11 @@ app.use(express.urlencoded({extended: false}))
 let deck = [
             {rank: '', suite: ""}
         ]  
+let game = {
+            playerHand: [],
+            dealerHand: []
+        }
+
 function deckBuild(){
     n=0;
     s = 0;
@@ -46,37 +51,52 @@ function deckBuild(){
     }
         
 }
-deckBuild()
-console.log(deck)
-let game = [{
-    playerHand: '',
-    dealerHand: ''
-}]
-
-    
-
-
 function dealCard(){
-    z=0
-    for (x of game){
-        z++
-        if (z<3){
             s = Math.floor(Math.random()*52)
-            game.push({
-            playerHand: deck[s] 
-        }) 
-        console.log(s)  
-    }} 
+            game.playerHand.push(deck[s]) 
+            console.log(s)
+            deck.splice(s, 1) 
+} 
+function dealerCard(){
+    s = Math.floor(Math.random()*52)
+    game.dealerHand.push(deck[s]) 
+    console.log(s)
+    deck.splice(s, 1) 
+} 
+function restartGame(){
+    game.dealerHand.splice(0,4)
+    game.playerHand.splice(0,4)
+    deckBuild()
+    dealCard()
+    dealCard()
+    dealerCard()
+    dealerCard()
+    //scoreCount()
 }
-dealCard()
+
+function scoreCount(hand){
+    let pPoints = 0
+    for(x of hand){
+        if (x.rank === 1){
+            pPoints += 11
+        } else{
+        pPoints = pPoints + x.rank}
+    }
+    console.log(pPoints)
+    return pPoints
+}
+
+
+
+restartGame()
 console.log(game)
 
 
 
-
-
-app.get('/a', (req,res)=>{
-    res.json('grungis');
+app.get('/hit', (req,res)=>{
+    game.Pvalue=scoreCount(game.playerHand)
+    game.Dvalue=scoreCount(game.dealerHand)
+    res.json(game)
 })
 app.get('/b', (req,res)=>{
     res.json('grangry'); 

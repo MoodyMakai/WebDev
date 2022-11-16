@@ -52,15 +52,15 @@ function deckBuild(){
         
 }
 function dealCard(){
-            s = Math.floor(Math.random()*52)
+            s = Math.floor(Math.random()*deck.length)
             game.playerHand.push(deck[s]) 
-            console.log(s)
+            //console.log(s)
             deck.splice(s, 1) 
 } 
 function dealerCard(){
-    s = Math.floor(Math.random()*52)
+    s = Math.floor(Math.random()*deck.length)
     game.dealerHand.push(deck[s]) 
-    console.log(s)
+    //console.log(s)
     deck.splice(s, 1) 
 } 
 function restartGame(){
@@ -70,27 +70,47 @@ function restartGame(){
     dealCard()
     dealCard()
     dealerCard()
-    dealerCard()
-    //scoreCount()
+    dealerCard()  
 }
-
 function scoreCount(hand){
     let pPoints = 0
     for(x of hand){
-        if (x.rank === 1){
+        if (x.rank === 1 && pPoints < 11){
             pPoints += 11
         } else{
         pPoints = pPoints + x.rank}
-    }
-    console.log(pPoints)
+        if(pPoints === 21){
+            console.log("Victory has been achieved")
+        }
+    } 
     return pPoints
 }
+function stand(){
+    while(scoreCount(game.dealerHand) < 17){
+        dealerCard()
+        console.log('dealer hand')
+        console.log(scoreCount(game.dealerHand))
+    } 
+    
+    if(scoreCount(game.dealerHand) > scoreCount(game.playerHand) && scoreCount(game.dealerHand) < 22){
+        console.log("dealer victory")
+        //restartGame()
+    } else{
+            console.log("dealer busts, player wins")
+            //restartGame()
+    }
+}
+
+
+
 
 
 
 restartGame()
 console.log(game)
-
+console.log('Player & dealer points')
+console.log(scoreCount(game.playerHand), scoreCount(game.dealerHand))
+stand()
 
 
 app.get('/hit', (req,res)=>{

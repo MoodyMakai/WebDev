@@ -1,0 +1,27 @@
+body{
+    background-color:cadetblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+input{
+    display: flex;
+    font-size: 32px;
+    padding: 8px;
+    margin: 18px;
+    color:darkred;
+}
+div{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+div#cardBox{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+img{
+    margin: 8px;
+}

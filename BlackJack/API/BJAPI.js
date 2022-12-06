@@ -3,11 +3,7 @@ const app = express()
 const port = 3080
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }))
-
-
-let deck = [
-
-]
+let deck = []
 let game = {
     playerHand: [],
     dealerHand: []
@@ -36,37 +32,6 @@ function deckBuild() {
         })
     }
 }
-/* 
- deck.push({
-     rank: n,
-     suite: "heart"
- })
-  else{
-     s++
-     if(s < 14){
-         deck.push({
-             rank: s,
-             suite: "spades"
-         })
-         }else {
-             d++
-             if(d < 14){
-                 deck.push({
-                     rank: d,
-                     suite: "diamonds"
-                 })
-         }else{
-             c++
-             if(c < 14){
-                 deck.push({
-                     rank: c,
-                     suite: "clubs"
-                 })}}
-         }
- }
-}*/
-
-
 function dealCard() {
     s = Math.floor(Math.random() * deck.length)
     game.playerHand.push(deck[s])
@@ -83,7 +48,6 @@ function restartGame() {
     game.dealerHand.splice(0, 4)
     game.playerHand.splice(0, 4)
     deckBuild()
-    console.log(deck)
     dealCard()
     dealCard()
     dealerCard()
@@ -100,6 +64,11 @@ function scoreCount(hand) {
         }
         if (pPoints === 21) {
             console.log("Victory has been achieved")
+            restartGame()
+        }
+        if (pPoints > 21){
+            console.log('player busts')
+            restartGame()
         }
     }
     return pPoints
@@ -113,26 +82,16 @@ function stand() {
 
     if (scoreCount(game.dealerHand) > scoreCount(game.playerHand) && scoreCount(game.dealerHand) < 22) {
         console.log("dealer victory")
-        //restartGame()
+        restartGame()
     } else {
         console.log("dealer busts, player wins")
-        //restartGame()
+        restartGame()
     }
-}
-
-
-
-
-
-/*
-restartGame()
-console.log(game)
-console.log('Player & dealer points')
-console.log(scoreCount(game.playerHand), scoreCount(game.dealerHand))
-stand()*/
+};
 
 
 app.post('/stand', (req, res) => {
+    console.log('standing')
     stand()
     game.Pvalue = scoreCount(game.playerHand)
     game.Dvalue = scoreCount(game.dealerHand)
@@ -148,14 +107,12 @@ app.post('/reset', (req, res) => {
     
 })
 app.post('/hit', (req,res)=> {
+    console.log('hitting')
     dealCard()
     game.Pvalue = scoreCount(game.playerHand)
     game.Dvalue = scoreCount(game.dealerHand)
     res.json(game)
 })
-
-
-
 
 
 app.listen(port, () => {

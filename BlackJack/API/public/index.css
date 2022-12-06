@@ -5,7 +5,7 @@ body{
     justify-content: center;
     align-items: center;
 }
-input{
+button{
     display: flex;
     font-size: 32px;
     padding: 8px;

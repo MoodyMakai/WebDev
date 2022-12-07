@@ -67,7 +67,7 @@ function scoreCount(hand) {
             restartGame()
         }
         if (pPoints > 21){
-            console.log('player busts')
+            console.log('bust')
             restartGame()
         }
     }
@@ -98,7 +98,6 @@ app.post('/stand', (req, res) => {
     res.json(game)
 })
 app.post('/reset', (req, res) => {
-    console.log('reset')
     restartGame()
     console.log('reset done')
     game.Pvalue = scoreCount(game.playerHand)

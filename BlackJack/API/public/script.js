@@ -35,7 +35,7 @@ reseting.addEventListener("click", () => {
                 while(playerHandBox.firstChild){
                     playerHandBox.removeChild(playerHandBox.firstChild)
                 }
-                for (x of playerHand){
+                for (x of game.playerHand){
                     document.querySelector('div#cardBox')
                     let L = document.createElement(img)
                     L.setAttribute('src', `PNG-cards-1.3/${rank}_of_${suite}.png`)

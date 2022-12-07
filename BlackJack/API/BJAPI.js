@@ -16,7 +16,7 @@ function deckBuild() {
     for (let n = 1; n < 14; n++) {
         deck.push({
             rank: n,
-            suite: "heart"
+            suite: "hearts"
         })
         deck.push({
             rank: n,

@@ -21,7 +21,6 @@ hitting.addEventListener("click", () => {
                 console.log(game)
         })
 })
-
 let reseting = document.getElementById("resetB");
 reseting.addEventListener("click", () => {
     console.log('reseting'),
@@ -30,21 +29,31 @@ reseting.addEventListener("click", () => {
         })
             .then(data => data.json())
             .then(game => {
+                let playerHandBox = document.querySelector('div#cardBox')
+                let dealerHandBox = document.querySelector('div#dealerCardBox')
                 console.log(game)
-                let playerHandBox = document.querySelector('div#cardbox')
-                while(playerHandBox.firstChild){
-                    playerHandBox.removeChild(playerHandBox.firstChild)
-                }
+                playerHandBox.replaceChildren()
                 for (x of game.playerHand){
                     document.querySelector('div#cardBox')
-                    let L = document.createElement(img)
-                    L.setAttribute('src', `PNG-cards-1.3/${rank}_of_${suite}.png`)
-                    img.setAttribute('width', '200')
-                    img.setAttribute('height', '300')
-                    cardBox.appendChild(img)
-                    
-
+                    let L = document.createElement('img')
+                    L.setAttribute('src', `PNG-cards-1.3/${x.rank}_of_${x.suite}.png`)
+                    L.setAttribute('width', '180') 
+                    L.setAttribute('height', '280')
+                    cardBox.appendChild(L) 
+                }
+                for (y of game.dealerHand){
+                    document.querySelector('div#dealerCardBox')
+                    let B = document.createElement('img')
+                    B.setAttribute('src', `PNG-cards-1.3/${y.rank}_of_${y.suite}.png`)
+                    B.setAttribute('width', '180') 
+                    B.setAttribute('height', '280')
+                    dealerHandBox.appendChild(B) 
+                    break;
                 }
             })
 })
 
+/* let playerHandBox = document.querySelector('div#cardbox')
+                /*while(playerHandBox.firstChild){
+                    playerHandBox.removeChild(playerHandBox.firstChild)
+                }*/ 
